@@ -10,12 +10,12 @@ import {
     Switcher,
     SwitcherItem
 } from 'carbon-components-react';
-import { User20 } from '@carbon/icons-react';
+import { UserAvatar32 } from '@carbon/icons-react';
 import { Link } from 'react-router-dom';
 
 const NavBar = (props) => {
     const { user, signInWithFacebook, signOut } = props;
-
+    console.log(user);
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -42,7 +42,16 @@ const NavBar = (props) => {
                 <HeaderGlobalAction
                     onClick={() => setExpanded(!expanded)}
                 >
-                    <User20 />
+                    {user ?
+                        <img 
+                            src={user.photoURL}
+                            height='32px'
+                            width='32px'
+                            alt='profile'
+                            style={{ borderRadius: '32px' }}
+                        /> :
+                        <UserAvatar32 />
+                    }
                 </HeaderGlobalAction>
             </HeaderGlobalBar>
             <HeaderPanel 
