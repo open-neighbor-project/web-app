@@ -6,6 +6,7 @@ import firebaseConfig from "./config/firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
+import Requests from "./pages/requests";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from './components/NavBar';
@@ -70,7 +71,7 @@ function App(props) {
           <ProtectedRoute
             authenticated={user != null}
             path="/requests"
-            component={About}
+            component={Requests}
           />
           <Route path="/about" component={About} />
           <Route path="/" component={Home} />
