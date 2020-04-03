@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e63bc1c5-6206-486b-b176-36c35301e9aa/deploy-status)](https://app.netlify.com/sites/open-neighbor-project/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
