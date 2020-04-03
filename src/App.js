@@ -6,7 +6,9 @@ import firebaseConfig from "./config/firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
+import Requests from "./pages/requests";
 import styled from "styled-components";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -69,6 +71,12 @@ function App(props) {
               <li>
                 <Link to="/about">About</Link>
               </li>
+              {user ? (
+                <li>
+                  <Link to="/requests">Requests</Link>
+                </li>
+              ) : null}
+
               <li>
                 {user ? (
                   <p>Hello, {user.displayName}</p>
@@ -93,12 +101,13 @@ function App(props) {
         </StyledHeader>
         <HeaderOffset />
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <ProtectedRoute
+            authenticated={user != null}
+            path="/requests"
+            component={Requests}
+          />
+          <Route path="/about" component={About} />
+          <Route path="/" component={Home} />
         </Switch>
       </div>
     </Router>
