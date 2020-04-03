@@ -9,7 +9,7 @@ import About from "./pages/about";
 import Requests from "./pages/requests";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
-import NavBar from './components/NavBar';
+import NavBar from "./components/NavBar";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -61,7 +61,7 @@ function App(props) {
   return (
     <Router>
       <div className="App">
-        <NavBar 
+        <NavBar
           user={user}
           signInWithFacebook={signInWithFacebook}
           signOut={signOut}
