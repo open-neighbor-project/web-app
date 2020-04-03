@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NavBar from './components/NavBar';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -58,46 +59,12 @@ function App(props) {
 
   return (
     <Router>
-      \
       <div className="App">
-        <StyledHeader>
-          <nav>
-            <h2>Open Neighbor Project</h2>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              {user ? (
-                <li>
-                  <Link to="/requests">Requests</Link>
-                </li>
-              ) : null}
-
-              <li>
-                {user ? (
-                  <p>Hello, {user.displayName}</p>
-                ) : (
-                  <p>Please sign in.</p>
-                )}
-              </li>
-              <li>
-                {user ? (
-                  <button onClick={signOut}>Sign out</button>
-                ) : (
-                  <div>
-                    {/* <button onClick={signInWithGoogle}>Sign in with Google</button> */}
-                    <button onClick={signInWithFacebook}>
-                      Sign in with FB
-                    </button>
-                  </div>
-                )}
-              </li>
-            </ul>
-          </nav>
-        </StyledHeader>
+        <NavBar 
+          user={user}
+          signInWithFacebook={signInWithFacebook}
+          signOut={signOut}
+        />
         <HeaderOffset />
         <Switch>
           <ProtectedRoute
