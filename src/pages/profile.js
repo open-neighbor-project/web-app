@@ -40,6 +40,8 @@ function Profile() {
 
   return (
     <Container>
+      <h1>Edit your profile</h1>
+      <br />
       <Formik
         initialValues={{
           address: "",
@@ -73,6 +75,8 @@ function Profile() {
                 invalid={Boolean(touched.address && errors.address)}
                 disabled={hasSubmitted}
               />
+            </div>
+            <div style={{ marginBottom: "2em" }}>
               <TextInput
                 id="phone"
                 name="phone"

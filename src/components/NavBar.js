@@ -27,7 +27,7 @@ const NavBar = (props) => {
 
   return (
     <Header>
-      <HeaderName prefix="">Open Neighbor Project</HeaderName>
+      <HeaderName prefix="">Good Neighbor Project</HeaderName>
       <HeaderNavigation>
         <HeaderMenuItem onClick={() => navigate("/", history)}>
           Home

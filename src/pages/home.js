@@ -1,9 +1,18 @@
 import React from "react";
+import img from "../img/good-neighbor-project.jpg";
+import styled from "styled-components";
+
+const StyledHome = styled.section`
+  img {
+    margin-top: 2em;
+    max-width: 400px;
+  }
+`;
 
 const Home = () => (
-  <section>
+  <StyledHome>
     <h1>
-      Welcome to the Open Neighbor project <span role="img">👋</span>
+      Welcome to the Good neighbor project <span role="img">👋</span>
     </h1>
     <br />
     <p>
@@ -15,7 +24,8 @@ const Home = () => (
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
-  </section>
+    <img src={img}></img>
+  </StyledHome>
 );
 
 export default Home;
