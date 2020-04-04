@@ -11,6 +11,7 @@ import Profile from "./pages/profile";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
+import UserContext from './utils/UserContext';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -29,27 +30,29 @@ function App(props) {
   const { user, signOut, signInWithFacebook, loading } = props;
 
   return (
-    <Router>
-      <div className="App">
-        <NavBar
-          user={user}
-          signInWithFacebook={signInWithFacebook}
-          signOut={signOut}
-        />
-        <HeaderOffset />
-        <Switch>
-          <ProtectedRoute user={user} path="/requests" component={Requests} />
-          <ProtectedRoute user={user} path="/new" component={NewRequest} />
-          <ProtectedRoute user={user} path="/profile" component={Profile} />
-          <Route
-            path="/"
-            component={() => (
-              <Home user={user} signInWithFacebook={signInWithFacebook} />
-            )}
+    <UserContext.Provider value={user}>
+      <Router>
+        <div className="App">
+          <NavBar
+            user={user}
+            signInWithFacebook={signInWithFacebook}
+            signOut={signOut}
           />
-        </Switch>
-      </div>
-    </Router>
+          <HeaderOffset />
+          <Switch>
+            <ProtectedRoute user={user} path="/requests" component={Requests} />
+            <ProtectedRoute user={user} path="/new" component={NewRequest} />
+            <ProtectedRoute user={user} path="/profile" component={Profile} />
+            <Route
+              path="/"
+              component={() => (
+                <Home user={user} signInWithFacebook={signInWithFacebook} />
+              )}
+            />
+          </Switch>
+        </div>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

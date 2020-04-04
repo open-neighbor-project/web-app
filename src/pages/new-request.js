@@ -13,6 +13,7 @@ import {
 import { TrashCan16 } from "@carbon/icons-react";
 import { Formik, FieldArray } from "formik";
 import styled from "styled-components";
+import UserContext from '../utils/UserContext';
 
 const Container = styled.div`
   max-width: 800px;
@@ -21,6 +22,8 @@ const Container = styled.div`
 `;
 
 const NewRequest = () => {
+  const user = React.useContext(UserContext);
+
   function validationHandler({ title, tasks }) {
     let errors = {};
 
@@ -40,7 +43,12 @@ const NewRequest = () => {
 
   function submissionHandler(values, { setSubmitting }) {
     setTimeout(() => {
-      console.log(JSON.stringify(values, null, 2));
+      console.log(JSON.stringify({
+        email: user.email,
+        title: values.title,
+        tasks: values.tasks,
+        additionalInfo: values.additionalInfo
+      }, null, 2));
       setSubmitting(false);
       setHasSubmitted(true);
     }, 800);
@@ -113,7 +121,7 @@ const NewRequest = () => {
                         }}
                         style={{ width: "100%", marginTop: "25px" }}
                       >
-                        Add task
+                        Add
                       </Button>
                     </div>
                   </div>
