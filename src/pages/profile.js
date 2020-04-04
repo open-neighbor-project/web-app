@@ -43,7 +43,7 @@ function ProfileForm({ user }) {
   return (
     <Formik
       initialValues={{
-        type: "requestor",
+        role: "requestor",
         address: "",
         phone: "",
       }}
@@ -67,9 +67,9 @@ function ProfileForm({ user }) {
           <div style={{ marginBottom: "2em" }}>
             <Select
               labelText="What brings you to the good neighbor project?"
-              id="type"
-              name="type"
-              value={values.type}
+              id="role"
+              name="role"
+              value={values.role}
               disabled={hasSubmitted}
             >
               <SelectItem value="requestor" text="I require assistance" />
