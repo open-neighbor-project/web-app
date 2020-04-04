@@ -11,10 +11,17 @@ import {
   SwitcherItem,
 } from "carbon-components-react";
 import { UserAvatar32 } from "@carbon/icons-react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
+function navigate(newPath, history) {
+  let path = document.location.pathname;
+  if (newPath !== path) {
+    history.push(newPath);
+  }
+}
 
 const NavBar = (props) => {
-  const { user, signInWithFacebook, signOut } = props;
+  const { user, signInWithFacebook, signOut, history } = props;
   console.log(user);
   const [expanded, setExpanded] = useState(false);
 
@@ -22,15 +29,17 @@ const NavBar = (props) => {
     <Header>
       <HeaderName prefix="">Open Neighbor Project</HeaderName>
       <HeaderNavigation>
-        <HeaderMenuItem>
-          <Link to="/">Home</Link>
-        </HeaderMenuItem>
-        <HeaderMenuItem>
-          <Link to="/about">About</Link>
+        <HeaderMenuItem onClick={() => navigate("/", history)}>
+          Home
         </HeaderMenuItem>
         {user ? (
-          <HeaderMenuItem>
-            <Link to="/requests">Requests</Link>
+          <HeaderMenuItem onClick={() => navigate("/requests", history)}>
+            Requests
+          </HeaderMenuItem>
+        ) : null}
+        {user ? (
+          <HeaderMenuItem onClick={() => navigate("/new", history)}>
+            Submit a request
           </HeaderMenuItem>
         ) : null}
       </HeaderNavigation>
@@ -52,14 +61,24 @@ const NavBar = (props) => {
       <HeaderPanel expanded={expanded}>
         <Switcher>
           {user ? (
-            <SwitcherItem
-              onClick={() => {
-                setExpanded(!expanded);
-                signOut();
-              }}
-            >
-              Sign out
-            </SwitcherItem>
+            <>
+              <SwitcherItem
+                onClick={() => {
+                  navigate("/profile", history);
+                  setExpanded(!expanded);
+                }}
+              >
+                Edit profile
+              </SwitcherItem>
+              <SwitcherItem
+                onClick={() => {
+                  setExpanded(!expanded);
+                  signOut();
+                }}
+              >
+                Sign out
+              </SwitcherItem>
+            </>
           ) : (
             <SwitcherItem
               onClick={() => {
@@ -76,4 +95,4 @@ const NavBar = (props) => {
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);

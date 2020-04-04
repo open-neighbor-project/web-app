@@ -5,8 +5,9 @@ import "firebase/auth";
 import firebaseConfig from "./config/firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/home";
-import About from "./pages/about";
 import Requests from "./pages/requests";
+import NewRequest from "./pages/new-request";
+import Profile from "./pages/profile";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
@@ -14,37 +15,6 @@ import NavBar from "./components/NavBar";
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const firebaseAppAuth = firebaseApp.auth();
-
-const StyledHeader = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: ${({ theme }) => theme.headerBackground};
-  z-index: 100;
-  ul {
-    display: flex;
-    li:not(:first-child) {
-      margin-left: 2em;
-    }
-  }
-  nav {
-    padding: 1.5em;
-    display: flex;
-    max-width: ${({ theme }) => theme.maxContentWidth};
-    margin: auto;
-    justify-content: space-between;
-    align-items: center;
-  }
-  @media screen and (max-width: 700px) {
-    .header-title {
-      display: none;
-    }
-    nav {
-      justify-content: space-around;
-    }
-  }
-`;
 
 const HeaderOffset = styled.div`
   margin-top: 6em;
@@ -56,7 +26,7 @@ const providers = {
 };
 
 function App(props) {
-  const { user, signOut, signInWithGoogle, signInWithFacebook } = props;
+  const { user, signOut, signInWithFacebook } = props;
 
   return (
     <Router>
@@ -73,7 +43,16 @@ function App(props) {
             path="/requests"
             component={Requests}
           />
-          <Route path="/about" component={About} />
+          <ProtectedRoute
+            authenticated={user != null}
+            path="/new"
+            component={NewRequest}
+          />
+          <ProtectedRoute
+            authenticated={user != null}
+            path="/profile"
+            component={Profile}
+          />
           <Route path="/" component={Home} />
         </Switch>
       </div>
