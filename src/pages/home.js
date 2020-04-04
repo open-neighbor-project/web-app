@@ -24,6 +24,10 @@ const Home = () => (
       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
       est laborum.
     </p>
+    <br />
+    <p>
+      Don't want to make a request online? Call the helpline at 647 873 2230
+    </p>
     <img src={img}></img>
   </StyledHome>
 );

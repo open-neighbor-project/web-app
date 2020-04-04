@@ -12,6 +12,14 @@ import {
 } from "carbon-components-react";
 import { UserAvatar32 } from "@carbon/icons-react";
 import { withRouter } from "react-router-dom";
+import styled from "styled-components";
+
+const MobileOnlySwitcher = styled(Switcher)`
+  display: none;
+  @media (max-width: 66rem) {
+    display: block;
+  }
+`;
 
 function navigate(newPath, history) {
   let path = document.location.pathname;
@@ -59,20 +67,50 @@ const NavBar = (props) => {
         </HeaderGlobalAction>
       </HeaderGlobalBar>
       <HeaderPanel expanded={expanded}>
+        <MobileOnlySwitcher>
+          <SwitcherItem
+            onClick={() => {
+              navigate("/", history);
+              setExpanded(false);
+            }}
+          >
+            Home
+          </SwitcherItem>
+          {user ? (
+            <SwitcherItem
+              onClick={() => {
+                navigate("/requests", history);
+                setExpanded(false);
+              }}
+            >
+              Requests
+            </SwitcherItem>
+          ) : null}
+          {user ? (
+            <SwitcherItem
+              onClick={() => {
+                navigate("/new", history);
+                setExpanded(false);
+              }}
+            >
+              Submit a request
+            </SwitcherItem>
+          ) : null}
+        </MobileOnlySwitcher>
         <Switcher>
           {user ? (
             <>
               <SwitcherItem
                 onClick={() => {
                   navigate("/profile", history);
-                  setExpanded(!expanded);
+                  setExpanded(false);
                 }}
               >
                 Edit profile
               </SwitcherItem>
               <SwitcherItem
                 onClick={() => {
-                  setExpanded(!expanded);
+                  setExpanded(false);
                   signOut();
                 }}
               >
