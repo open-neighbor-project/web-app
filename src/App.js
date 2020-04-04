@@ -6,6 +6,7 @@ import firebaseConfig from "./config/firebase";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/home";
 import Requests from "./pages/requests";
+import Request from "./pages/request";
 import NewRequest from "./pages/new-request";
 import Profile from "./pages/profile";
 import styled from "styled-components";
@@ -34,13 +35,22 @@ function App(props) {
       <Router>
         <div className="App">
           <NavBar
-            user={user}
             signInWithFacebook={signInWithFacebook}
             signOut={signOut}
           />
           <HeaderOffset />
           <Switch>
-            <ProtectedRoute user={user} path="/requests" component={Requests} />
+            <ProtectedRoute
+              user={user}
+              path="/requests"
+              exact
+              component={Requests}
+            />
+            <ProtectedRoute
+              user={user}
+              path="/requests/:id"
+              component={Request}
+            />
             <ProtectedRoute user={user} path="/new" component={NewRequest} />
             <ProtectedRoute user={user} path="/profile" component={Profile} />
             <Route

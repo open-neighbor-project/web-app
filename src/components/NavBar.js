@@ -13,6 +13,7 @@ import {
 import { UserAvatar32 } from "@carbon/icons-react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../utils/UserContext";
 
 const MobileOnlySwitcher = styled(Switcher)`
   display: none;
@@ -29,8 +30,10 @@ function navigate(newPath, history) {
 }
 
 const NavBar = (props) => {
-  const { user, signInWithFacebook, signOut, history } = props;
-  console.log(user);
+  const { signInWithFacebook, signOut, history } = props;
+
+  const user = React.useContext(UserContext);
+  
   const [expanded, setExpanded] = useState(false);
 
   return (

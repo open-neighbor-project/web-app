@@ -102,9 +102,6 @@ function ProfileForm({ user }) {
             />
           </div>
           <div style={{ display: "flex" }}>
-            <Button kind="secondary" onClick={() => window.location.reload()}>
-              Reset form
-            </Button>
             {isSubmitting || hasSubmitted ? (
               <InlineLoading
                 success={hasSubmitted}
