@@ -26,7 +26,7 @@ const providers = {
 };
 
 function App(props) {
-  const { user, signOut, signInWithFacebook } = props;
+  const { user, signOut, signInWithFacebook, loading } = props;
 
   return (
     <Router>
@@ -38,21 +38,9 @@ function App(props) {
         />
         <HeaderOffset />
         <Switch>
-          <ProtectedRoute
-            authenticated={user != null}
-            path="/requests"
-            component={Requests}
-          />
-          <ProtectedRoute
-            authenticated={user != null}
-            path="/new"
-            component={NewRequest}
-          />
-          <ProtectedRoute
-            authenticated={user != null}
-            path="/profile"
-            component={Profile}
-          />
+          <ProtectedRoute user={user} path="/requests" component={Requests} />
+          <ProtectedRoute user={user} path="/new" component={NewRequest} />
+          <ProtectedRoute user={user} path="/profile" component={Profile} />
           <Route path="/" component={Home} />
         </Switch>
       </div>

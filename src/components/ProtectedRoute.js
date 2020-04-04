@@ -1,12 +1,18 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-const PrivateRoute = ({ authenticated, component: Component, ...rest }) => (
+const PrivateRoute = ({ user, component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) =>
-      authenticated === true ? <Component {...props} /> : <Redirect to="/" />
-    }
+    render={(props) => {
+      if (user === undefined) {
+        return null; // undefined user means still loading
+      } else if (user === null) {
+        return <Redirect to="/" />; // null means loaded and not signed in
+      } else {
+        return <Component {...props} />;
+      }
+    }}
   />
 );
 
