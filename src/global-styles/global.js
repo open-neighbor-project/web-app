@@ -1,10 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-  html {
-    font-family: sans-serif;
-  }
-
   body {
     background-color: ${({ theme }) => theme.primaryLight};
     color: ${({ theme }) => theme.primaryDark};
@@ -28,6 +24,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   section {
+    padding-left: 1em;
+    padding-right: 1em;
     max-width: ${({ theme }) => theme.maxContentWidth};
     margin: auto;
   }

@@ -10,7 +10,7 @@ const PrivateRoute = ({ user, component: Component, ...rest }) => (
       } else if (user === null) {
         return <Redirect to="/" />; // null means loaded and not signed in
       } else {
-        return <Component {...props} />;
+        return <Component user={user} {...props} />;
       }
     }}
   />
