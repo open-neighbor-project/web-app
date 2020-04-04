@@ -41,7 +41,12 @@ function App(props) {
           <ProtectedRoute user={user} path="/requests" component={Requests} />
           <ProtectedRoute user={user} path="/new" component={NewRequest} />
           <ProtectedRoute user={user} path="/profile" component={Profile} />
-          <Route path="/" component={Home} />
+          <Route
+            path="/"
+            component={() => (
+              <Home user={user} signInWithFacebook={signInWithFacebook} />
+            )}
+          />
         </Switch>
       </div>
     </Router>

@@ -5,5 +5,5 @@ export default {
   secondaryLight: "#F9F7F4",
   highlight: "#118AB2",
   headerBackground: "#F9FFFF",
-  maxContentWidth: "1100px",
+  maxContentWidth: "1200px",
 };

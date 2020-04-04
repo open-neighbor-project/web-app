@@ -101,19 +101,24 @@ function ProfileForm({ user }) {
               disabled={hasSubmitted}
             />
           </div>
-          {isSubmitting || hasSubmitted ? (
-            <InlineLoading
-              success={hasSubmitted}
-              icondescription="Active loading indicator"
-              description={
-                hasSubmitted ? "Submission successful" : "Submitting data..."
-              }
-            />
-          ) : (
-            <Button type="submit" disabled={isSubmitting}>
-              Submit
+          <div style={{ display: "flex" }}>
+            <Button kind="secondary" onClick={() => window.location.reload()}>
+              Reset form
             </Button>
-          )}
+            {isSubmitting || hasSubmitted ? (
+              <InlineLoading
+                success={hasSubmitted}
+                icondescription="Active loading indicator"
+                description={
+                  hasSubmitted ? "Submission successful" : "Submitting data..."
+                }
+              />
+            ) : (
+              <Button type="submit" disabled={isSubmitting}>
+                Submit
+              </Button>
+            )}
+          </div>
         </Form>
       )}
     </Formik>
@@ -123,17 +128,7 @@ function ProfileForm({ user }) {
 function Profile({ user }) {
   return (
     <Container>
-      <h1 style={{ float: "left" }}>Edit your profile</h1>
-      <br />
-      {/* TODO: Improve this */}
-      <Button
-        style={{ float: "right" }}
-        kind="secondary"
-        onClick={() => window.location.reload()}
-      >
-        Reset form
-      </Button>
-      <br />
+      <h1>Edit your profile</h1>
       <br />
       <p>Welcome {user.displayName}</p>
       <br />
