@@ -13,12 +13,15 @@ import {
 import { TrashCan16 } from "@carbon/icons-react";
 import { Formik, FieldArray } from "formik";
 import styled from "styled-components";
-import UserContext from '../utils/UserContext';
+import UserContext from "../utils/UserContext";
 
 const Container = styled.div`
   max-width: 800px;
-  padding: 2em;
   margin: auto;
+
+  .bx--label {
+    font-size: 1em;
+  }
 `;
 
 const NewRequest = () => {
@@ -43,12 +46,18 @@ const NewRequest = () => {
 
   function submissionHandler(values, { setSubmitting }) {
     setTimeout(() => {
-      console.log(JSON.stringify({
-        email: user.email,
-        title: values.title,
-        tasks: values.tasks,
-        additionalInfo: values.additionalInfo
-      }, null, 2));
+      console.log(
+        JSON.stringify(
+          {
+            email: user.email,
+            title: values.title,
+            tasks: values.tasks,
+            additionalInfo: values.additionalInfo,
+          },
+          null,
+          2
+        )
+      );
       setSubmitting(false);
       setHasSubmitted(true);
     }, 800);
@@ -57,6 +66,12 @@ const NewRequest = () => {
   return (
     <Container>
       <h1>Submit a new request</h1>
+      <p>
+        If you, or someone you know, would benefit from assistance, please fill
+        out the new request form in order for us to route your request to one of
+        our available volunteers.
+      </p>
+      <br />
       <br />
       <Formik
         initialValues={{
@@ -101,7 +116,7 @@ const NewRequest = () => {
                       <TextInput
                         id="taskItem"
                         name="taskItem"
-                        labelText="Task item"
+                        labelText="Add a task item"
                         placeholder="Enter a task"
                         value={task}
                         onChange={(e) => setTask(e.target.value)}

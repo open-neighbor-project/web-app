@@ -33,7 +33,7 @@ const NavBar = (props) => {
   const { signInWithFacebook, signOut, history } = props;
 
   const user = React.useContext(UserContext);
-  
+
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -42,6 +42,9 @@ const NavBar = (props) => {
       <HeaderNavigation>
         <HeaderMenuItem onClick={() => navigate("/", history)}>
           Home
+        </HeaderMenuItem>
+        <HeaderMenuItem onClick={() => navigate("/faq", history)}>
+          Guidelines & FAQ
         </HeaderMenuItem>
         {user ? (
           <HeaderMenuItem onClick={() => navigate("/requests", history)}>
@@ -78,6 +81,14 @@ const NavBar = (props) => {
             }}
           >
             Home
+          </SwitcherItem>
+          <SwitcherItem
+            onClick={() => {
+              navigate("/faq", history);
+              setExpanded(false);
+            }}
+          >
+            Guidelines & FAQ
           </SwitcherItem>
           {user ? (
             <SwitcherItem

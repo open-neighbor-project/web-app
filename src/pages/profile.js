@@ -9,11 +9,24 @@ import {
   Select,
   SelectItem,
 } from "carbon-components-react";
+import VolunteerGuidelines from "../components/VolunteerGuidlines";
 
 const Container = styled.div`
   max-width: 800px;
-  padding: 2em;
   margin: auto;
+  padding-bottom: 3em;
+
+  .bx--label {
+    font-size: 1em;
+  }
+
+  .bx--label--disabled {
+    color: #393939;
+  }
+
+  .bx--text-input:disabled {
+    color: #545454;
+  }
 `;
 
 function ProfileForm({ user }) {
@@ -66,7 +79,7 @@ function ProfileForm({ user }) {
         >
           <div style={{ marginBottom: "2em" }}>
             <Select
-              labelText="What brings you to the good neighbor project?"
+              labelText="What brings you to the Good Neighbor Project?"
               id="role"
               name="role"
               value={values.role}
@@ -76,6 +89,16 @@ function ProfileForm({ user }) {
               <SelectItem value="volunteer" text="I would like to volunteer" />
               <SelectItem value="operator" text="I am a hotline operator" />
             </Select>
+          </div>
+          {values.role === "volunteer" && <VolunteerGuidelines />}
+          <div style={{ marginBottom: "2em" }}>
+            <TextInput
+              id="Email"
+              name="Email"
+              labelText="Email address"
+              value={user.email}
+              disabled
+            />
           </div>
           <div style={{ marginBottom: "2em" }}>
             <TextInput
@@ -129,7 +152,7 @@ function Profile({ user }) {
       <br />
       <p>Welcome {user.displayName}</p>
       <br />
-      <ProfileForm />
+      <ProfileForm user={user} />
     </Container>
   );
 }

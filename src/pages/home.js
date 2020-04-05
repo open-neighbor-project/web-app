@@ -18,12 +18,15 @@ const StyledHome = styled.section`
     margin-top: 2em;
     max-width: 400px;
   }
+  h1 {
+    font-size: 2.5em;
+  }
 `;
 
 const Home = ({ user, signInWithFacebook }) =>
   console.log(signInWithFacebook) || (
     <StyledHome>
-      <h1 style={{ fontSize: "3em" }}>Welcome to the Good Neighbor Project</h1>
+      <h1>Welcome to the Good Neighbor Project</h1>
       <br />
       <p>
         Are you a person in need that requires delivery assistance for supplies

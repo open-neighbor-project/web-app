@@ -8,11 +8,12 @@ import Home from "./pages/home";
 import Requests from "./pages/requests";
 import Request from "./pages/request";
 import NewRequest from "./pages/new-request";
+import Guidelines from "./pages/guidelines";
 import Profile from "./pages/profile";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
-import UserContext from './utils/UserContext';
+import UserContext from "./utils/UserContext";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -34,10 +35,7 @@ function App(props) {
     <UserContext.Provider value={user}>
       <Router>
         <div className="App">
-          <NavBar
-            signInWithFacebook={signInWithFacebook}
-            signOut={signOut}
-          />
+          <NavBar signInWithFacebook={signInWithFacebook} signOut={signOut} />
           <HeaderOffset />
           <Switch>
             <ProtectedRoute
@@ -53,6 +51,7 @@ function App(props) {
             />
             <ProtectedRoute user={user} path="/new" component={NewRequest} />
             <ProtectedRoute user={user} path="/profile" component={Profile} />
+            <Route path="/faq" component={Guidelines} />
             <Route
               path="/"
               component={() => (
