@@ -9,6 +9,7 @@ import Requests from "./pages/requests";
 import Request from "./pages/request";
 import NewRequest from "./pages/new-request";
 import Guidelines from "./pages/guidelines";
+import Helpline from "./pages/helpline";
 import Profile from "./pages/profile";
 import styled from "styled-components";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -51,6 +52,7 @@ function App(props) {
             />
             <ProtectedRoute user={user} path="/new" component={NewRequest} />
             <ProtectedRoute user={user} path="/profile" component={Profile} />
+            <Route path="/helpline" component={Helpline} />
             <Route path="/faq" component={Guidelines} />
             <Route
               path="/"

@@ -6,7 +6,11 @@ export async function getAllRequests() {
   return json;
 }
 
-export async function getRequestById(id) {}
+export async function getRequestById(id) {
+  const res = await fetch(`${REACT_APP_ORDER_API_ROOT}/order/api/${id}`);
+  const json = await res.json();
+  return json;
+}
 
 export async function createRequest(request) {
   const res = await fetch(`${REACT_APP_ORDER_API_ROOT}/order/api`, {
