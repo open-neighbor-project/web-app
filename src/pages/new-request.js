@@ -52,7 +52,7 @@ const NewRequest = () => {
       title: values.title,
       preferredStore: values.preferredStore,
       budget: values.budget,
-      tasks: values.tasks,
+      itemList: values.tasks,
       additionalInfo: values.additionalInfo,
     };
 
