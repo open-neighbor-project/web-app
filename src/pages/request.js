@@ -9,6 +9,7 @@ import {
 
 const status = [
   "CREATED",
+  "PENDING_ASSIGNMENT",
   "ASSIGNED",
   "IN_PROGRESS",
   "DELIVERED",
@@ -87,6 +88,11 @@ const Request = () => {
         <ProgressStep
           description="Step 1: Getting started with Carbon Design System"
           label="Created"
+        />
+        <ProgressStep
+          style={{ width: "100%" }}
+          description="Step 2: Getting started with Carbon Design System"
+          label="Unassigned"
         />
         <ProgressStep
           description="Step 3: Getting started with Carbon Design System"
