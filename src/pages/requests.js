@@ -5,6 +5,7 @@ import {
   StructuredListCell,
   StructuredListHead,
   StructuredListRow,
+  Button,
 } from "carbon-components-react";
 import { withRouter } from "react-router-dom";
 import * as RequestService from "../services/requests";
@@ -33,7 +34,7 @@ const Requests = ({ history }) => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  function loadRequests() {
     setLoading(true);
     RequestService.getAllRequests()
       .then((requests) => {
@@ -46,6 +47,10 @@ const Requests = ({ history }) => {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  useEffect(() => {
+    loadRequests();
   }, []);
 
   if (loading) {
@@ -54,7 +59,17 @@ const Requests = ({ history }) => {
 
   return (
     <section>
-      <h1>Requests</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <h1>Requests</h1>
+        <Button kind="secondary" onClick={loadRequests}>
+          Refresh
+        </Button>
+      </div>
       <StructuredListWrapper>
         <StructuredListHead>
           <StructuredListRow head>
@@ -64,6 +79,13 @@ const Requests = ({ history }) => {
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
+          {requests.map((request) => (
+            <RequestRow
+              id={request.orderId}
+              status={request.status}
+              description={request.desc}
+            />
+          ))}
           <RequestRow
             id={1}
             status="Unassigned"
