@@ -83,25 +83,9 @@ const Requests = ({ history }) => {
             <RequestRow
               id={request.orderId}
               status={request.status}
-              description={request.desc}
+              description={request.title}
             />
           ))}
-          <RequestRow
-            id={1}
-            status="Unassigned"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-            posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-            Pellentesque vulputate nisl a porttitor interdum."
-          />
-          <RequestRow
-            id={2}
-            status="In progress"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-            magna, finibus id tortor sed, aliquet bibendum augue. Aenean
-            posuere sem vel euismod dignissim. Nulla ut cursus dolor.
-            Pellentesque vulputate nisl a porttitor interdum."
-          />
         </StructuredListBody>
       </StructuredListWrapper>
     </section>

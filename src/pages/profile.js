@@ -10,6 +10,7 @@ import {
   SelectItem,
 } from "carbon-components-react";
 import VolunteerGuidelines from "../components/VolunteerGuidlines";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 800px;
@@ -51,7 +52,6 @@ function ProfileForm({ user }) {
 
   function submissionHandler(values, { setSubmitting }) {
     setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
       setHasSubmitted(true);
     }, 1200);
@@ -137,7 +137,9 @@ function ProfileForm({ user }) {
                 success={hasSubmitted}
                 icondescription="Active loading indicator"
                 description={
-                  hasSubmitted ? "Submission successful" : "Submitting data..."
+                  hasSubmitted
+                    ? "Updated your profile"
+                    : "Updating your profile ..."
                 }
               />
             ) : (
@@ -146,6 +148,13 @@ function ProfileForm({ user }) {
               </Button>
             )}
           </div>
+          <br />
+          {hasSubmitted && (
+            <div>
+              Profile updated: <Link to="/new">Create a new request</Link> or{" "}
+              <Link to="/requests">View all existing request</Link>
+            </div>
+          )}
         </Form>
       )}
     </Formik>
