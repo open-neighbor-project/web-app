@@ -9,11 +9,13 @@ import {
   ListItem,
   InlineLoading,
   InlineNotification,
+  NumberInput,
 } from "carbon-components-react";
 import { TrashCan16 } from "@carbon/icons-react";
 import { Formik, FieldArray } from "formik";
 import styled from "styled-components";
 import UserContext from "../utils/UserContext";
+import * as RequestService from "../services/requests";
 
 const Container = styled.div`
   max-width: 800px;
@@ -45,22 +47,26 @@ const NewRequest = () => {
   const [tasksError, setTasksError] = useState(false);
 
   function submissionHandler(values, { setSubmitting }) {
-    setTimeout(() => {
-      console.log(
-        JSON.stringify(
-          {
-            email: user.email,
-            title: values.title,
-            tasks: values.tasks,
-            additionalInfo: values.additionalInfo,
-          },
-          null,
-          2
-        )
-      );
-      setSubmitting(false);
-      setHasSubmitted(true);
-    }, 800);
+    const request = {
+      email: user.email,
+      title: values.title,
+      preferredStore: values.preferredStore,
+      budget: values.budget,
+      tasks: values.tasks,
+      additionalInfo: values.additionalInfo,
+    };
+
+    RequestService.createRequest(request)
+      .then(() => {
+        // todo
+      })
+      .catch(() => {
+        // todo
+      })
+      .finally(() => {
+        setSubmitting(false);
+        setHasSubmitted(true);
+      });
   }
 
   return (
@@ -76,6 +82,8 @@ const NewRequest = () => {
       <Formik
         initialValues={{
           title: "",
+          preferredStore: "",
+          budget: 5,
           tasks: [],
           additionalInfo: "",
         }}
@@ -108,6 +116,32 @@ const NewRequest = () => {
                 disabled={hasSubmitted}
               />
             </div>
+            <div style={{ marginBottom: "2em" }}>
+              <TextInput
+                id="preferredStore"
+                name="preferredStore"
+                labelText="Preferred Store"
+                placeholder="Enter your preferred store"
+                value={values.preferredStore}
+                invalidText={errors.preferredStore}
+                invalid={Boolean(
+                  touched.preferredStore && errors.preferredStore
+                )}
+                disabled={hasSubmitted}
+              />
+            </div>
+            <div style={{ marginBottom: "2em" }}>
+              <NumberInput
+                id="budget"
+                name="budget"
+                label="Budget ($)"
+                placeholder="Enter a budget"
+                min="0"
+                value={values.budget}
+                invalidText="Budget cannot be negative"
+                disabled={hasSubmitted}
+              />
+            </div>
             <FieldArray name="tasks">
               {({ push, remove }) => (
                 <div>
@@ -116,8 +150,8 @@ const NewRequest = () => {
                       <TextInput
                         id="taskItem"
                         name="taskItem"
-                        labelText="Add a task item"
-                        placeholder="Enter a task"
+                        labelText="Add a request item"
+                        placeholder="Enter a request item"
                         value={task}
                         onChange={(e) => setTask(e.target.value)}
                         disabled={hasSubmitted}
@@ -146,10 +180,10 @@ const NewRequest = () => {
                         kind="error"
                         lowContrast
                         title=""
-                        subtitle="There must be at least one task"
+                        subtitle="There must be at least one request item"
                       />
                     ) : null}
-                    <FormLabel>Tasks</FormLabel>
+                    <FormLabel>Request items</FormLabel>
                     <OrderedList>
                       {values.tasks.length > 0 ? (
                         values.tasks.map((p, index) => (
@@ -161,7 +195,7 @@ const NewRequest = () => {
                           </ListItem>
                         ))
                       ) : (
-                        <p>No tasks added</p>
+                        <p>No request items added</p>
                       )}
                     </OrderedList>
                   </div>
@@ -182,27 +216,31 @@ const NewRequest = () => {
                 disabled={hasSubmitted}
               />
             </div>
-            {isSubmitting || hasSubmitted ? (
-              <InlineLoading
-                success={hasSubmitted}
-                icondescription="Active loading indicator"
-                description={
-                  hasSubmitted ? "Submission successful" : "Submitting data..."
-                }
-              />
-            ) : (
-              <Button
-                type="submit"
-                onClick={() => {
-                  if (values.tasks.length === 0) {
-                    setTasksError(true);
+            <div style={{ marginBottom: "2em" }}>
+              {isSubmitting || hasSubmitted ? (
+                <InlineLoading
+                  success={hasSubmitted}
+                  icondescription="Active loading indicator"
+                  description={
+                    hasSubmitted
+                      ? "Submission successful"
+                      : "Submitting data..."
                   }
-                }}
-                disabled={isSubmitting}
-              >
-                Submit
-              </Button>
-            )}
+                />
+              ) : (
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    if (values.tasks.length === 0) {
+                      setTasksError(true);
+                    }
+                  }}
+                  disabled={isSubmitting}
+                >
+                  Submit
+                </Button>
+              )}
+            </div>
           </Form>
         )}
       </Formik>
