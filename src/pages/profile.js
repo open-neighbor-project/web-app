@@ -30,7 +30,7 @@ const Container = styled.div`
 `;
 
 function ProfileForm({ user }) {
-  function validationHandler({ address, phone }) {
+  function validationHandler({ address, phone, email }) {
     let errors = {};
 
     if (!address) {
@@ -38,6 +38,10 @@ function ProfileForm({ user }) {
     }
     if (!phone) {
       errors.phone = "Required";
+    }
+
+    if (!email) {
+      errors.email = "Required";
     }
 
     return errors;
@@ -57,6 +61,7 @@ function ProfileForm({ user }) {
     <Formik
       initialValues={{
         role: "requestor",
+        email: user.email,
         address: "",
         phone: "",
       }}
@@ -93,11 +98,13 @@ function ProfileForm({ user }) {
           {values.role === "volunteer" && <VolunteerGuidelines />}
           <div style={{ marginBottom: "2em" }}>
             <TextInput
-              id="Email"
-              name="Email"
+              id="email"
+              name="email"
               labelText="Email address"
-              value={user.email}
-              disabled
+              value={values.email}
+              invalidText={errors.email}
+              invalid={Boolean(touched.email && errors.email)}
+              disabled={hasSubmitted}
             />
           </div>
           <div style={{ marginBottom: "2em" }}>

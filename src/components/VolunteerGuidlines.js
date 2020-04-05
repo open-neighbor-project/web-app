@@ -3,6 +3,7 @@ import React from "react";
 const VolunteerGuidlines = () => (
   <div>
     <h2>Please read the following guidelines for being a volunteer:</h2>
+    <br />
     <p>
       Health: Please ensure you do not have any of the following symptoms - if
       you do, you cannot volunteer:

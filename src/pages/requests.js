@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StructuredListWrapper,
   StructuredListBody,
@@ -7,6 +7,7 @@ import {
   StructuredListRow,
 } from "carbon-components-react";
 import { withRouter } from "react-router-dom";
+import * as RequestService from "../services/requests";
 
 function navigate(newPath, history) {
   let path = document.location.pathname;
@@ -31,6 +32,25 @@ const RequestRow = withRouter(({ history, id, status, description }) => {
 const Requests = ({ history }) => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    RequestService.getAllRequests()
+      .then((requests) => {
+        setRequests(requests);
+        setLoading(false);
+      })
+      .catch(() => {
+        // TODO
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <section>

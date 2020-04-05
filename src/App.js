@@ -3,7 +3,7 @@ import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "./config/firebase";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Requests from "./pages/requests";
 import Request from "./pages/request";
